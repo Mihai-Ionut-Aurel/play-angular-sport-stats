@@ -1,0 +1,35 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="c_Team_home">
+      <mat-header-cell *cdkHeaderCellDef>Home Team </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+            {{row.c_Team_home}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- score Column -->
+    <ng-container cdkColumnDef="score">
+      <mat-header-cell *cdkHeaderCellDef> Score </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.team_goals_home}} - {{row.team_goals_away}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- away team Column -->
+    <ng-container cdkColumnDef="c_Team_away">
+      <mat-header-cell *cdkHeaderCellDef> Away Team </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.c_Team_away}}
+      </mat-cell>
+    </ng-container>
+
+   <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *cdkRowDef="let row; columns: displayedColumns ;" ></mat-row>
+ </mat-table>
+</div>

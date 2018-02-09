@@ -1,0 +1,21 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+            <button md-raised-button  >{{row.c_Team}}</button>
+      </mat-cell>
+    </ng-container>
+
+
+
+   <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *cdkRowDef="let row; columns: displayedColumns ;" (click)="selectTeam(row)"></mat-row>
+ </mat-table>
+</div>

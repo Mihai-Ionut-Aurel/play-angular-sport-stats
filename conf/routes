@@ -1,0 +1,41 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Serve index page from public directory
+GET     /                           controllers.FrontendController.index()
+
+# An example route (Prefix all API routes with apiPrefix defined in application.conf)
+GET     /api/summary                controllers.HomeController.appSummary
+
+# Returns a JSON with unique teams
+GET     /api/teams/:name                controllers.FrontendAPIController.teamsofCompetition(name: String)
+
+# Returns a JSON with unique teams
+GET     /api/teams                controllers.FrontendAPIController.teams()
+
+
+
+# Returns a JSON with unique players
+GET     /api/players                controllers.FrontendAPIController.players()
+
+# Returns a JSON with players from a team based on that team id
+GET     /api/playersOfTeam/:id                 controllers.FrontendAPIController.playersOfTeam(id: Int)
+
+
+# Returns a JSON with competition ranking
+GET     /api/leaderboard             controllers.FrontendAPIController.competitionRankins(name: Option[String])
+
+# Returns a JSON with competition matches
+GET     /api/matches             controllers.FrontendAPIController.competitionMatches(name: Option[String])
+
+# Returns a JSON with unique competitions
+GET     /api/competitions                controllers.FrontendAPIController.competitions()
+
+
+
+# Upload CSV file to server for analysis
+POST    /api/upload                 controllers.FrontendAPIController.upload()
+
+# Serve static assets under public directory
+GET     /*file                      controllers.FrontendController.assetOrDefault(file)

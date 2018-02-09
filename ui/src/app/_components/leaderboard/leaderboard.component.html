@@ -1,0 +1,51 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="team">
+      <mat-header-cell *cdkHeaderCellDef> Team </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+           {{row.c_Team}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- home wins Column -->
+    <ng-container cdkColumnDef="wins_home">
+      <mat-header-cell *cdkHeaderCellDef> Wins Home </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.wins_home}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- away wins Column -->
+    <ng-container cdkColumnDef="wins_away">
+      <mat-header-cell *cdkHeaderCellDef> Wins Aways </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.wins_away}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- draws Column -->
+    <ng-container cdkColumnDef="draws">
+      <mat-header-cell *cdkHeaderCellDef> Draws </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.draws}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- points Column -->
+    <ng-container cdkColumnDef="points">
+      <mat-header-cell *cdkHeaderCellDef> Points </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{row.points}}
+      </mat-cell>
+    </ng-container>
+
+   <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *cdkRowDef="let row; columns: displayedColumns ;" (click)="selectTeam(row)"></mat-row>
+ </mat-table>
+</div>

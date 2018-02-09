@@ -1,0 +1,19 @@
+img {
+
+  max-height: 80%;
+}
+img {
+
+  height:80%;
+}
+a {
+  height:80%;
+}
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+span{
+  height: 80%;
+}

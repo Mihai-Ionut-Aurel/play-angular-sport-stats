@@ -1,0 +1,35 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+            {{row.c_competition}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Leaderboard Column -->
+    <ng-container cdkColumnDef="leaderboard">
+      <mat-header-cell *cdkHeaderCellDef> View Leaderboard </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        <button md-raised-button (click)="viewLeaderboardCompetition(row)" >Leaderboard</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Leaderboard Column -->
+    <ng-container cdkColumnDef="matches">
+      <mat-header-cell *cdkHeaderCellDef> ViewMatches </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        <button md-raised-button (click)="viewMatchesCompetition(row)"  >Matches</button>
+      </mat-cell>
+    </ng-container>
+
+   <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *cdkRowDef="let row; columns: displayedColumns ;" ></mat-row>
+ </mat-table>
+</div>
