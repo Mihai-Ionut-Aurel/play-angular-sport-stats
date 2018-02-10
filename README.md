@@ -1,12 +1,8 @@
 [![MIT License][license-badge]][LICENSE]
 
-# Scala Play Angular Seed
+# Demo for Job Interview
 
-> Use play framework to develop the web application backend/services and frontend using Angular CLI, all in a totally integrated workflow and single unified console. This approach will deliver perfect development experience without CORS hassle. 
-
-Read more @ http://bit.ly/2AStvhK
-
-[![Scala Play Angular Seed](https://github.com/yohangz/scala-play-angular-seed/blob/master/angular.png)](http://bit.ly/2AStvhK)
+This project was build as a showcase for a job interview.
 
 ## Used Summary
 
@@ -40,163 +36,35 @@ Read more @ http://bit.ly/2AStvhK
     sbt test            # Run both backend and frontend unit tests
 ```
 
-* This seed is not using [scala play views](https://www.playframework.com/documentation/2.6.x/ScalaTemplates). All the views and frontend associated routes are served via [React](https://reactjs.org/) code base under `ui` directory.
 
-## Complete Directory Layout
+* Project based on the template (https://github.com/yohangz/scala-play-angular-seed)
 
+In addition added:
 ```
-├── /app/                                 # The backend source (controllers, models, services)
-│     └── /controllers/                   # Backend controllers
-│           └── FrontendController.scala  # Asset controller wrapper serving frontend assets and artifacts
-├── /conf/                                # Configurations files and other non-compiled resources (on classpath)
-│     ├── application.conf                # Play application configuratiion file.
-│     ├── logback.xml                     # Logging configuration
-│     └── routes                          # Routes definition file
-├── /logs/                                # Log directory
-│     └── application.log                 # Application log file
-├── /project/                             # Contains project build configuration and plugins
-│     ├── FrontendCommands.scala          # Frontend build command mapping configuration
-│     ├── FrontendRunHook.scala           # Forntend build PlayRunHook (trigger frontend serve on sbt run)
-│     ├── build.properties                # Marker for sbt project
-│     └── plugins.sbt                     # SBT plugins declaration
-├── /public/                              # Frontend build artifacts will be copied to this directory
-├── /target/                              # Play project build artifact directory
-│     ├── /universal/                     # Application packaging
-│     └── /web/                           # Compiled web assets
-├── /test/                                # Contains unit tests of backend sources
-├── /ui/                                  # React frontend source (based on Create React App)
-│     ├── /e2e/                           # End to end tests folder
-│     ├── /node_modules/                  # 3rd-party frontend libraries and utilities
-│     ├── /src/                           # The frontend source code (modules, componensts, models, directives, services etc.) of the application
-│     ├── .angular-cli.json               # Builds the project from source to output(lib and bower) folder
-│     ├── .editorconfig                   # Define and maintain consistent coding styles between different editors and IDEs
-│     ├── .gitignore                      # Contains ui files to be ignored when pushing to git
-│     ├── karma.conf.js                   # Karma configuration file
-│     ├── package.json                    # Holds various metadata configuration relevant to the ui
-│     ├── protractor.conf.js              # Protractor configuration file
-│     ├── proxy.conf.json                 # UI proxy configuration
-│     ├── README.md                       # Contains all user guide details for the ui
-│     ├── tsconfig.json                   # Contains typescript compiler options
-│     └── tslint.json                     # Lint rules for the ui
-├── .gitignore                            # Contains files to be ignored when pushing to git
-├── build.sbt                             # Play application SBT configuration
-├── LICENSE                               # License Agreement file
-├── README.md                             # Application user guide
-└── ui-build.sbt                          # SBT command hooks associated with frontend npm scripts 
-```
-
-## What is new in here?
-
-### FrontendCommands.scala
-
-* Frontend build command mapping configuration.
-
-```
-    ├── /project/
-    │     ├── FrontendCommands.scala
-```
+├── /app/                       # The backend (scala) application sources (controllers, models, views, assets)  
+│     ├──controllers/
+│        ├── FrontendAPIController.scala         #Controller that serve data to the front end
+│     ├── models                # Model cases created to handle specific data structures for the assignment
+│     └── utility               # Utility class for common operation to be executed on the data to be aggregated
+├── /test/                      # Tests for the controller and for the defined utility class
+├── /ui/                        # Angular front end sources
+│     ├── /app/                 # End to end tests folder
+│        ├── /_components/   #Several Angualr2 components that show the data aggregation to the user
+│            ├── /competitions  # Angualar 2 Component with unit tests defined for it
+│            ├── /leaderboard   # Angualar 2 Component with unit tests
+│        ├── models             # Data structures for the data received from the back-end
+│        ├── services           # API service. Communicates with the back-end to send and receive data
+│     ├── enviroments           # Added configurations variables in the environment.ts
 
 
-### FrontendRunHook.scala
+### What the app does:
+* Allows to upload a CSV file with sport actions
+* Allows the user to select the competion
+* Showcases the leaderboard for a given competition
+* Showcase the matches and results for a given competition
 
-* PlayRunHook implementation to trigger ``npm run start`` on ``sbt run``.
-
-```
-    ├── /project/
-    │     ├── FrontendRunHook.scala
-```
-
-### FrontendController.scala
-
-* Asset controller wrapper serving frontend assets and artifacts.
-
-```
-    ├── /app/                                 
-    │     └── /controllers/                   
-    │           └── FrontendController.scala
-```
-
-### ui-build.sbt
-
-* This file contains the build task hooks to trigger frontend npm scripts on sbt command execution.
-
-### npm scripts
-
-* New and modified npm scripts of [Angular CLI](https://cli.angular.io/) generated package.json.
-* Check [UI README.md](./ui/README.md) to see all available frontend build tasks.
-
-```
-├── /ui/
-│     ├── package.json
-```
-
-### proxy.conf.json
-
-* Used to proxy play backend API when running the project on watch mode.
-
-```
-├── /ui/
-│     ├── proxy.conf.json
-```
-
-## Routes
-
-```
-├── /conf/      
-│     ├── routes
-```
-
-* The following route configuration map index.html to entry route (root). This should be placed as the initial route.
-
-```
-GET        /             controllers.FrontendController.index()
-```
-
-* All API routes should be prefixed with API prefix defined under ``application.conf`` (Default prefix ``apiPrefix = "api"``) 
-
-Example API route:
-
-```
-GET        /api/summary  controllers.HomeController.appSummary
-```
-
-* The following route is being used to serve frontend associated build artifacts (css, js) and static assets (images, etc.). This should be placed as the final route.
-
-```
-GET        /*file        controllers.FrontendController.assetOrDefault(file)
-```
-
-**Note: _On production build all the front end Angular build artifacts will be copied to the `public/ui` folder._**
-
-## Can be used to implement any front end/ui build!
-
-* Simply replace the ui directory with the build of your choice
-* Make output directory ROOT/public/
-* Implement a proxy to localhost:9000
-
-## Looking for some other frontend framework or language choice
-
-* [Java Play Angular Seed](https://github.com/yohangz/java-play-angular-seed)
-* [Scala Play React Seed](https://github.com/yohangz/scala-play-react-seed)
-* [Java Play React Seed](https://github.com/yohangz/java-play-react-seed)
-* [Scala Play Vuejs Seed](https://github.com/duncannevin/scala-play-vue-seed) by [Duncan Nevin](https://github.com/duncannevin)
-* [Java Play Vuejs Seed](https://github.com/duncannevin/java-play-vue-seed) by [Duncan Nevin](https://github.com/duncannevin)
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-|[<img src="https://avatars2.githubusercontent.com/u/5279079?s=400&v=4" width="100px;"/><br /><sub>Yohan Gomez</sub>][yohan-profile]| [<img src="https://avatars2.githubusercontent.com/u/6312524?s=400&u=efc9267c6f903c379fafaaf7b3b0d9a939474c01&v=4" width="100px;"/><br /><sub>Lahiru Jayamanna</sub>][lahiru-profile]<br />| [<img src="https://avatars0.githubusercontent.com/u/3881403?s=400&v=4" width="100px;"/><br /><sub>Gayan Attygalla</sub>](https://github.com/Arty26)| [<img src="https://avatars0.githubusercontent.com/u/24251976?s=400&v=4" width="100px;"/><br /><sub>Anuradha Gunasekara</sub>][anuradha-profile]|
-| :---: | :---: | :---: | :---: |
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-## License
-
-This software is licensed under the MIT license
-
-[license-badge]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
-[license]: https://github.com/yohangz/scala-play-angular-seed/blob/master/LICENSE
-
-[yohan-profile]: https://github.com/yohangz
-[lahiru-profile]: https://github.com/lahiruz
-[gayan-profile]: https://github.com/Arty26
-[anuradha-profile]: https://github.com/sanuradhag
+### Extra functions that are not used by the front-end
+* Get player based on a team : SportActionUtilities.getTeamPlayers
+* Get all players : SportActionUtilities.getPlayers
+* Get matches of a given team: SportActionUtilities.GetTeamMatches
+* Get all teams in the given file : FrontendAPIController.teams

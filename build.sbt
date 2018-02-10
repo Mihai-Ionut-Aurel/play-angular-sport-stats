@@ -6,6 +6,14 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava).settings(
   watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
 )
 
+
+// setting a maintainer which is used for all packaging types
+maintainer := "Ionut Mihai"
+
+// exposing the front-end port
+dockerExposedPorts in Docker := Seq(4200)
+
+
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 scalaVersion := "2.12.3"

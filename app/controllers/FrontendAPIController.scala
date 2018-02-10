@@ -15,18 +15,14 @@ import models._
 import play.api.Logger
 import utility.SportActionUtilities
 
+
 class FrontendAPIController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   var sportActionUtilities: SportActionUtilities= new SportActionUtilities();
   var actions: List[SportAction]=_;
 
   def upload = Action(parse.multipartFormData) { request =>
     request.body.file("data").map { data =>
-
-      // only get the last part of the filename
-      // otherwise someone can send a path like ../../home/foo/bar.txt to write to other files on the system
-      val filename = Paths.get(data.filename).getFileName
-      data.ref.moveTo(Paths.get(s"D:/ProiecteScala/$filename"), replace = true)
-      actions = sportActionUtilities.readCSV(s"D:/ProiecteScala/Dataset2roundsEredivie20172018.csv").map(_.get)
+      actions = sportActionUtilities.readCSV(data.ref.getAbsolutePath()).map(_.get)
       Logger.debug(actions.length.toString)
       if(actions.length>0)
         Logger.debug(actions(actions.length-1).toString())

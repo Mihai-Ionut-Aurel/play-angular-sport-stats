@@ -1,0 +1,3 @@
+n_actionid,c_competition,n_Matchid,d_date,c_Action,c_Period,n_StartTime,n_Endtime,c_HomeOrAway,n_TeamID,c_Team,n_personid,c_person,c_Function,n_ShirtNr,c_ActionReason,c_actionInfo,n_Subpersonid,c_Subperson
+22039489,Eredivisie 2017/2018,2174508,11-Aug-2017 19:00,Foul committed,First half,24000,24000,Home,77,ADO Den Haag,1223164,Sheraldo Becker,NULL,NULL,Rough play,NULL,924566,Anouar Kali
+22039490,Eredivisie 2017/2018,2174508,11-Aug-2017 19:00,Free kick,First half,29000,29000,Away,16,FC Utrecht,924566,Anouar Kali,NULL,NULL,NULL,Left foot,0,NULL
